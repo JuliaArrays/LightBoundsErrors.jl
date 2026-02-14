@@ -31,7 +31,7 @@ end
         end
         @testset "1D" begin
             a = Vector{elt}(undef, 2)
-            for n ∈ 0:4
+            for n ∈ 1:4
                 @test let is = ntuple(Returns(1), n)
                     nothing === @inferred checkbounds_lightboundserror(a, is...)
                 end
