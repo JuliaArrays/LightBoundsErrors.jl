@@ -1,0 +1,6 @@
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+LightBoundsErrors = "e21c612c-4641-4669-b9c3-3f4360ced9da"
+
+[sources]
+LightBoundsErrors = {path = ".."}
