@@ -29,6 +29,23 @@ end
                 end
             end
         end
+        @testset "1D" begin
+            a = Vector{elt}(undef, 2)
+            for n ∈ 0:4
+                @test let is = ntuple(Returns(1), n)
+                    nothing === @inferred checkbounds_lightboundserror(a, is...)
+                end
+            end
+            for n ∈ 0:3
+                @test let is = ntuple(Returns(1), n)
+                    nothing === @inferred checkbounds_lightboundserror(a, 2, is...)
+                end
+            end
+            @test_throws LightBoundsError checkbounds_lightboundserror(a)
+            @test_throws error_message_pattern("", a) checkbounds_lightboundserror(a)
+            @test_throws LightBoundsError checkbounds_lightboundserror(a, 0, 0, 0)
+            @test_throws error_message_pattern("0, 0, 0", a) checkbounds_lightboundserror(a, 0, 0, 0)
+        end
     end
 end
 
