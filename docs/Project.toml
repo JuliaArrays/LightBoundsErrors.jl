@@ -4,3 +4,7 @@ LightBoundsErrors = "e21c612c-4641-4669-b9c3-3f4360ced9da"
 
 [sources]
 LightBoundsErrors = {path = ".."}
+
+[compat]
+Documenter = "1"
+LightBoundsErrors = "1"
