@@ -15,4 +15,4 @@ The advantage over `BoundsError` is that `LightBoundsError` does not store the a
 Thus throwing `LightBoundsError` does not escape the array, unlike throwing `BoundsError`.
 This implies that `LightBoundsError` makes it possible for the Julia compiler to eliminate more heap allocations.
 Some of these benefits will only be realized as the compiler becomes capable of interprocedural escape analysis.
-Intraprocedural escape analysis is already here, but its success heavily depends on inlining behavior.
+*Intra*procedural escape analysis is already here, but its success heavily depends on inlining behavior.
