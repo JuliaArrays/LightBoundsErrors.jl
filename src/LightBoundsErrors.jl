@@ -49,19 +49,19 @@ module LightBoundsErrors
         print(io, '`')
         nothing
     end
-    function throw_lightboundserror_impl(; collection_type::DataType, collection_axes::Tuple, requested_indices::Tuple)
+    @noinline function throw_lightboundserror_impl(collection_type::DataType, collection_axes::Tuple, requested_indices::Tuple)
         ex = LightBoundsError(; collection_type, collection_axes, requested_indices)
         throw(ex)
     end
     function throw_lightboundserror(x, requested_indices::Tuple)
         collection_type = typeof(x)
         collection_axes = axes(x)
-        throw_lightboundserror_impl(; collection_type, collection_axes, requested_indices)
+        @noinline throw_lightboundserror_impl(collection_type, collection_axes, requested_indices)
     end
     function checkbounds_lightboundserror_impl(checkbounds::C, x, requested_indices...) where {C}
-        is_inbounds = checkbounds(Bool, x, requested_indices...)
+        is_inbounds = @inline checkbounds(Bool, x, requested_indices...)
         if !is_inbounds
-            throw_lightboundserror(x, requested_indices)
+            @inline throw_lightboundserror(x, requested_indices)
         end
         nothing
     end
@@ -73,6 +73,6 @@ module LightBoundsErrors
     Otherwise, return `nothing`.
     """
     function checkbounds_lightboundserror(x, requested_indices...)
-        checkbounds_lightboundserror_impl(checkbounds, x, requested_indices...)
+        @inline checkbounds_lightboundserror_impl(checkbounds, x, requested_indices...)
     end
 end
