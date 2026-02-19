@@ -44,9 +44,9 @@ module LightBoundsErrors
         show(io, typeof(ex))
         print(io, ": out-of-bounds indexing: `collection[")
         show_splatted(io, ex.requested_indices)
-        print(io, "]`, where `typeof(collection) == ")
+        print(io, "]`, where:\n* `typeof(collection) == ")
         show(io, ex.collection_type)
-        print(io, "` and `axes(collection) == ")
+        print(io, "`\n* `axes(collection) == ")
         show(io, ex.collection_axes)
         print(io, '`')
         nothing
