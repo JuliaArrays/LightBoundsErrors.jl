@@ -63,6 +63,15 @@ module LightBoundsErrors
     See also:
 
     * [`checkbounds_lightboundserror`](@ref)
+
+    ### Example usage
+
+    ```julia-repl
+    julia> throw_lightboundserror(rand(2, 2), (2, 3))
+    ERROR: LightBoundsError: out-of-bounds indexing: `collection[2, 3]`, where:
+    * `typeof(collection) == Matrix{Float64}`
+    * `axes(collection) == (Base.OneTo(2), Base.OneTo(2))`
+    ```
     """
     function throw_lightboundserror(x, requested_indices::Tuple)
         collection_type = typeof(x)
@@ -85,6 +94,15 @@ module LightBoundsErrors
     See also:
 
     * [`throw_lightboundserror`](@ref)
+
+    ### Example usage
+
+    ```julia-repl
+    julia> checkbounds_lightboundserror(rand(2, 2), 2, 3)
+    ERROR: LightBoundsError: out-of-bounds indexing: `collection[2, 3]`, where:
+    * `typeof(collection) == Matrix{Float64}`
+    * `axes(collection) == (Base.OneTo(2), Base.OneTo(2))`
+    ```
     """
     function checkbounds_lightboundserror(x, requested_indices...)
         @inline checkbounds_lightboundserror_impl(checkbounds, x, requested_indices...)
