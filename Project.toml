@@ -1,7 +1,7 @@
 name = "LightBoundsErrors"
 uuid = "e21c612c-4641-4669-b9c3-3f4360ced9da"
 authors = ["Neven Sajko <s@purelymail.com> and contributors"]
-version = "1.0.0"
+version = "1.1.0"
 
 [compat]
 julia = "1.10"

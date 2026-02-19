@@ -1,5 +1,5 @@
 module LightBoundsErrors
-    export LightBoundsError, checkbounds_lightboundserror
+    export LightBoundsError, throw_lightboundserror, checkbounds_lightboundserror
     function print_comma_blank(io::IO)
         print(io, ',')
         print(io, ' ')
@@ -28,6 +28,8 @@ module LightBoundsErrors
 
     A subtype of `Exception` similar to `BoundsError`, but more friendly to the compiler optimizer.
 
+    Use [`throw_lightboundserror`](@ref) to throw `LightBoundsError` unconditionally.
+
     Use [`checkbounds_lightboundserror`](@ref) to throw `LightBoundsError` conditionally.
     """
     mutable struct LightBoundsError <: Exception
@@ -53,6 +55,11 @@ module LightBoundsErrors
         ex = LightBoundsError(; collection_type, collection_axes, requested_indices)
         throw(ex)
     end
+    """
+        throw_lightboundserror(indexable_collection, requested_indices::Tuple)
+
+    Throw [`LightBoundsError`](@ref) for the given indexable collection and indices.
+    """
     function throw_lightboundserror(x, requested_indices::Tuple)
         collection_type = typeof(x)
         collection_axes = axes(x)
