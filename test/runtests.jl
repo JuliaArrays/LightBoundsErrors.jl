@@ -11,6 +11,10 @@ end
     @testset "`LightBoundsError`" begin
         @test LightBoundsError <: Exception
     end
+    @testset "`throw_lightboundserror`" begin
+        @test_throws LightBoundsError throw_lightboundserror([1])
+        @test_throws LightBoundsError throw_lightboundserror([1], 3, 7)
+    end
     @testset "`checkbounds_lightboundserror`" begin
         elt = Float32
         @testset "0D" begin
