@@ -56,9 +56,13 @@ module LightBoundsErrors
         throw(ex)
     end
     """
-        throw_lightboundserror(indexable_collection, requested_indices::Tuple)
+        throw_lightboundserror(x, requested_indices::Tuple)
 
     Throw [`LightBoundsError`](@ref) for the given indexable collection and indices.
+
+    See also:
+
+    * [`checkbounds_lightboundserror`](@ref)
     """
     function throw_lightboundserror(x, requested_indices::Tuple)
         collection_type = typeof(x)
@@ -75,9 +79,12 @@ module LightBoundsErrors
     """
         checkbounds_lightboundserror(x, requested_indices...)
 
-    `checkbounds_lightboundserror(x, requested_indices...)` throws
-    [`LightBoundsError`](@ref) if `!checkbounds(Bool, x, requested_indices...)`.
-    Otherwise, return `nothing`.
+    Throw [`LightBoundsError`](@ref) if
+    `!checkbounds(Bool, x, requested_indices...)`. Otherwise, return `nothing`.
+
+    See also:
+
+    * [`throw_lightboundserror`](@ref)
     """
     function checkbounds_lightboundserror(x, requested_indices...)
         @inline checkbounds_lightboundserror_impl(checkbounds, x, requested_indices...)
