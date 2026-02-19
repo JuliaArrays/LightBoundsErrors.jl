@@ -56,7 +56,7 @@ module LightBoundsErrors
         throw(ex)
     end
     """
-        throw_lightboundserror(x, requested_indices::Tuple)
+        throw_lightboundserror(x, requested_indices...)
 
     Throw [`LightBoundsError`](@ref) for the given indexable collection and indices.
 
