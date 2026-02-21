@@ -78,7 +78,7 @@ module LightBoundsErrors
         collection_axes = axes(x)
         @noinline throw_lightboundserror_impl(collection_type, collection_axes, requested_indices)
     end
-    function checkbounds_lightboundserror_impl(checkbounds::C, x, requested_indices...) where {C}
+    function checkbounds_lightboundserror_impl(checkbounds, x, requested_indices...)
         is_inbounds = @inline checkbounds(Bool, x, requested_indices...)
         if !is_inbounds
             @inline throw_lightboundserror(x, requested_indices...)
